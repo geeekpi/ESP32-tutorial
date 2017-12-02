@@ -7,7 +7,6 @@
     * [Windows](Installation/Windows.md)
     * [Mac OS](Installation/MacOS.md)
     * [Linux](Installation/Linux.md)
-    * [Firmware](Installation/Firmware.md)
 * [IO](IO/README.md)
     * [GPIO](IO/GPIO.md)
     * [PWM](IO/PWM.md)
