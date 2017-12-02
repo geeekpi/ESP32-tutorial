@@ -399,6 +399,52 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="gpio">GPIO</h1>
+<p>In this example, we use several LEDs to show how to use GPIO with MicroPython.</p>
+<h2 id="output">OUTPUT</h2>
+<h3 id="wiring">Wiring</h3>
+<p><img src="GPIO-OUTPUT.JPG" alt="GPIO-OUTPUT"></p>
+<ul>
+<li>Connect pin 4 to a LED + pin.  </li>
+<li>Connect GND to the LED - pin.</li>
+</ul>
+<h3 id="code">Code</h3>
+<p>Open the MicroPython REPL in the terminal.</p>
+<p>Use the <code>machine.Pin</code> class:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+
+p4 = Pin(<span class="hljs-number">4</span>, Pin.OUT)    <span class="hljs-comment"># create output pin on GPIO4</span>
+p4.value(<span class="hljs-number">1</span>)                 <span class="hljs-comment"># set pin to &quot;on&quot; (high) level</span>
+p4.value(<span class="hljs-number">0</span>)                <span class="hljs-comment"># set pin to &quot;off&quot; (low) level</span>
+</code></pre>
+<p>By setting high or low levels, the LED will be on or off.</p>
+<h2 id="input">INPUT</h2>
+<h3 id="wiring">Wiring</h3>
+<p><img src="GPIO-INPUT.JPG" alt="GPIO-INPUT"></p>
+<ul>
+<li>Connect a button to pin 2.</li>
+<li>Connect GND to button.</li>
+</ul>
+<h3 id="code">Code</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+
+p2 = Pin(<span class="hljs-number">2</span>, Pin.IN)     <span class="hljs-comment"># create input pin on GPIO2</span>
+print(p2.value())       <span class="hljs-comment"># get value, 0 or 1</span>
+</code></pre>
+<p>Press or release the button, you&apos;ll get different values.</p>
+<blockquote>
+<p>Available pins are: 0, 1, 2, 3, 4, 5, 12, 13, 14, 15, 16, which correspond to the actual GPIO pin numbers of ESP8266 chip.</p>
+</blockquote>
+<h2 id="combine-inputoutput">Combine INPUT&amp;OUTPUT</h2>
+<pre><code class="lang-python">p2 = Pin(<span class="hljs-number">2</span>, Pin.IN, Pin.PULL_UP)    <span class="hljs-comment"># enable internal pull-up resistor</span>
+p4 = Pin(<span class="hljs-number">4</span>, Pin.OUT, value=<span class="hljs-number">1</span>)       <span class="hljs-comment"># set pin high on creation</span>
+
+<span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+  <span class="hljs-keyword">if</span> p2.value():
+    p4.value(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">else</span>:
+    p4.value(<span class="hljs-number">0</span>)
+</code></pre>
+<p>With this code, when you release the button, the LED is on and off while you pressing it.</p>
 
                                 
                                 </section>
@@ -442,7 +488,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"GPIO","level":"2.2.1","depth":2,"next":{"title":"PWM","level":"2.2.2","depth":2,"path":"IO/PWM.md","ref":"IO/PWM.md","articles":[]},"previous":{"title":"IO","level":"2.2","depth":1,"path":"IO/README.md","ref":"IO/README.md","articles":[{"title":"GPIO","level":"2.2.1","depth":2,"path":"IO/GPIO.md","ref":"IO/GPIO.md","articles":[]},{"title":"PWM","level":"2.2.2","depth":2,"path":"IO/PWM.md","ref":"IO/PWM.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"IO/GPIO.md","mtime":"2017-12-02T08:27:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-02T10:32:35.479Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"GPIO","level":"2.2.1","depth":2,"next":{"title":"PWM","level":"2.2.2","depth":2,"path":"IO/PWM.md","ref":"IO/PWM.md","articles":[]},"previous":{"title":"IO","level":"2.2","depth":1,"path":"IO/README.md","ref":"IO/README.md","articles":[{"title":"GPIO","level":"2.2.1","depth":2,"path":"IO/GPIO.md","ref":"IO/GPIO.md","articles":[]},{"title":"PWM","level":"2.2.2","depth":2,"path":"IO/PWM.md","ref":"IO/PWM.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"IO/GPIO.md","mtime":"2017-12-02T11:33:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-02T11:33:44.054Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -450,10 +496,6 @@
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
