@@ -207,6 +207,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.2.3" data-path="../IO/ADC.html">
+            
+                <a href="../IO/ADC.html">
+            
+                    
+                    ADC
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -252,6 +265,32 @@
             
         </li>
     
+        <li class="chapter " data-level="2.3.3" data-path="RTC.html">
+            
+                <a href="RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="Deep-sleep.html">
+            
+                <a href="Deep-sleep.html">
+            
+                    
+                    Deep-sleep
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -277,6 +316,19 @@
             
                     
                     WIFI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="../Network/requests.html">
+            
+                <a href="../Network/requests.html">
+            
+                    
+                    requests
             
                 </a>
             
@@ -316,6 +368,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.5.2" data-path="../Sensor/DS18x20.html">
+            
+                <a href="../Sensor/DS18x20.html">
+            
+                    
+                    DS18x20
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -341,6 +406,32 @@
             
                     
                     SPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.2" data-path="../BUS/I2C.html">
+            
+                <a href="../BUS/I2C.html">
+            
+                    
+                    I2C
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.3" data-path="../BUS/OneWire.html">
+            
+                <a href="../BUS/OneWire.html">
+            
+                    
+                    OneWire
             
                 </a>
             
@@ -399,6 +490,26 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="delay">Delay</h1>
+<p>Just like other boards, MicroPython also has functions to delay itself for a while.</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> time
+
+time.sleep(<span class="hljs-number">1</span>)           <span class="hljs-comment"># sleep for 1 second</span>
+time.sleep_ms(<span class="hljs-number">500</span>)      <span class="hljs-comment"># sleep for 500 milliseconds</span>
+time.sllep_us(<span class="hljs-number">10</span>)       <span class="hljs-comment"># sleep for 10 microseconds</span>
+start = time.ticks_ms() <span class="hljs-comment"># get millisecond counter</span>
+delta = time.ticks_diff(time.ticks_ms(), start) <span class="hljs-comment"># compute time difference</span>
+</code></pre>
+<p>If we have a LED connected to pin 0, then type in the following code and the LED will blink for several times.</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+
+p0 = Pin(<span class="hljs-number">0</span>, Pin.OUT)
+state = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>):
+    p0.value(state)
+    state = <span class="hljs-number">1</span> - state
+    time.sleep(<span class="hljs-number">1</span>)
+</code></pre>
 
                                 
                                 </section>
@@ -442,7 +553,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Delay","level":"2.3.1","depth":2,"next":{"title":"Timer","level":"2.3.2","depth":2,"path":"General/Timer.md","ref":"General/Timer.md","articles":[]},"previous":{"title":"General","level":"2.3","depth":1,"path":"General/README.md","ref":"General/README.md","articles":[{"title":"Delay","level":"2.3.1","depth":2,"path":"General/Dealy.md","ref":"General/Dealy.md","articles":[]},{"title":"Timer","level":"2.3.2","depth":2,"path":"General/Timer.md","ref":"General/Timer.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"General/Dealy.md","mtime":"2017-12-02T10:44:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-02T11:33:44.054Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Delay","level":"2.3.1","depth":2,"next":{"title":"Timer","level":"2.3.2","depth":2,"path":"General/Timer.md","ref":"General/Timer.md","articles":[]},"previous":{"title":"General","level":"2.3","depth":1,"path":"General/README.md","ref":"General/README.md","articles":[{"title":"Delay","level":"2.3.1","depth":2,"path":"General/Dealy.md","ref":"General/Dealy.md","articles":[]},{"title":"Timer","level":"2.3.2","depth":2,"path":"General/Timer.md","ref":"General/Timer.md","articles":[]},{"title":"RTC","level":"2.3.3","depth":2,"path":"General/RTC.md","ref":"General/RTC.md","articles":[]},{"title":"Deep-sleep","level":"2.3.4","depth":2,"path":"General/Deep-sleep.md","ref":"General/Deep-sleep.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"General/Dealy.md","mtime":"2017-12-03T13:10:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-03T13:33:03.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>WIFI · GitBook</title>
+        <title>I2C · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="requests.html" />
+    <link rel="next" href="OneWire.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="SPI.html" />
     
 
     </head>
@@ -296,9 +296,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="./">
+        <li class="chapter " data-level="2.4" data-path="../Network/">
             
-                <a href="./">
+                <a href="../Network/">
             
                     
                     Network
@@ -310,9 +310,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="2.4.1" data-path="WIFI.html">
+        <li class="chapter " data-level="2.4.1" data-path="../Network/WIFI.html">
             
-                <a href="WIFI.html">
+                <a href="../Network/WIFI.html">
             
                     
                     WIFI
@@ -323,9 +323,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4.2" data-path="requests.html">
+        <li class="chapter " data-level="2.4.2" data-path="../Network/requests.html">
             
-                <a href="requests.html">
+                <a href="../Network/requests.html">
             
                     
                     requests
@@ -386,9 +386,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.6" data-path="../BUS/">
+        <li class="chapter " data-level="2.6" data-path="./">
             
-                <a href="../BUS/">
+                <a href="./">
             
                     
                     BUS
@@ -400,9 +400,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.6.1" data-path="../BUS/SPI.html">
+        <li class="chapter " data-level="2.6.1" data-path="SPI.html">
             
-                <a href="../BUS/SPI.html">
+                <a href="SPI.html">
             
                     
                     SPI
@@ -413,9 +413,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.6.2" data-path="../BUS/I2C.html">
+        <li class="chapter active" data-level="2.6.2" data-path="I2C.html">
             
-                <a href="../BUS/I2C.html">
+                <a href="I2C.html">
             
                     
                     I2C
@@ -426,9 +426,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.6.3" data-path="../BUS/OneWire.html">
+        <li class="chapter " data-level="2.6.3" data-path="OneWire.html">
             
-                <a href="../BUS/OneWire.html">
+                <a href="OneWire.html">
             
                     
                     OneWire
@@ -474,7 +474,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >WIFI</a>
+        <a href=".." >I2C</a>
     </h1>
 </div>
 
@@ -489,21 +489,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="wifi">WIFI</h1>
-<p>The network module:</p>
-<pre><code class="lang-python"><span class="hljs-keyword">import</span> network
+                                <h1 id="i2c">I2C</h1>
+<p>The I2C driver is implemented in software and works on all pins, and is accessed via the <code>machine.I2C</code> class:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, I2C
 
-wlan = network.WLAN(network.STA_IF) <span class="hljs-comment"># create station interface</span>
-wlan.active(<span class="hljs-keyword">True</span>)       <span class="hljs-comment"># activate the interface</span>
-wlan.scan()             <span class="hljs-comment"># scan for access points</span>
-wlan.isconnected()      <span class="hljs-comment"># check if the station is connected to an AP</span>
-wlan.connect(<span class="hljs-string">&apos;essid&apos;</span>, <span class="hljs-string">&apos;password&apos;</span>) <span class="hljs-comment"># connect to an AP</span>
-wlan.config(<span class="hljs-string">&apos;mac&apos;</span>)      <span class="hljs-comment"># get the interface&apos;s MAC adddress</span>
-wlan.ifconfig()         <span class="hljs-comment"># get the interface&apos;s IP/netmask/gw/DNS addresses</span>
+<span class="hljs-comment"># construct an I2C bus</span>
+i2c = I2C(scl=Pin(<span class="hljs-number">5</span>), sda=Pin(<span class="hljs-number">4</span>), freq=<span class="hljs-number">100000</span>)
 
-ap = network.WLAN(network.AP_IF) <span class="hljs-comment"># create access-point interface</span>
-ap.active(<span class="hljs-keyword">True</span>)         <span class="hljs-comment"># activate the interface</span>
-ap.config(essid=<span class="hljs-string">&apos;ESP-AP&apos;</span>) <span class="hljs-comment"># set the ESSID of the access point</span>
+i2c.readfrom(<span class="hljs-number">0x3a</span>, <span class="hljs-number">4</span>)   <span class="hljs-comment"># read 4 bytes from slave device with address 0x3a</span>
+i2c.writeto(<span class="hljs-number">0x3a</span>, <span class="hljs-string">&apos;12&apos;</span>) <span class="hljs-comment"># write &apos;12&apos; to slave device with address 0x3a</span>
+
+buf = bytearray(<span class="hljs-number">10</span>)     <span class="hljs-comment"># create a buffer with 10 bytes</span>
+i2c.writeto(<span class="hljs-number">0x3a</span>, buf)  <span class="hljs-comment"># write the given buffer to the slave</span>
 </code></pre>
 
                                 
@@ -532,12 +529,12 @@ ap.config(essid=<span class="hljs-string">&apos;ESP-AP&apos;</span>) <span class
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Network">
+                <a href="SPI.html" class="navigation navigation-prev " aria-label="Previous page: SPI">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="requests.html" class="navigation navigation-next " aria-label="Next page: requests">
+                <a href="OneWire.html" class="navigation navigation-next " aria-label="Next page: OneWire">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -548,7 +545,7 @@ ap.config(essid=<span class="hljs-string">&apos;ESP-AP&apos;</span>) <span class
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"WIFI","level":"2.4.1","depth":2,"next":{"title":"requests","level":"2.4.2","depth":2,"path":"Network/requests.md","ref":"Network/requests.md","articles":[]},"previous":{"title":"Network","level":"2.4","depth":1,"path":"Network/README.md","ref":"Network/README.md","articles":[{"title":"WIFI","level":"2.4.1","depth":2,"path":"Network/WIFI.md","ref":"Network/WIFI.md","articles":[]},{"title":"requests","level":"2.4.2","depth":2,"path":"Network/requests.md","ref":"Network/requests.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Network/WIFI.md","mtime":"2017-12-03T13:31:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-03T13:33:03.518Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"I2C","level":"2.6.2","depth":2,"next":{"title":"OneWire","level":"2.6.3","depth":2,"path":"BUS/OneWire.md","ref":"BUS/OneWire.md","articles":[]},"previous":{"title":"SPI","level":"2.6.1","depth":2,"path":"BUS/SPI.md","ref":"BUS/SPI.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"BUS/I2C.md","mtime":"2017-12-03T13:24:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-03T13:33:03.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

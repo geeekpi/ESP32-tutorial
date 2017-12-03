@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../BUS/" />
+    <link rel="next" href="DS18x20.html" />
     
     
     <link rel="prev" href="./" />
@@ -207,6 +207,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.2.3" data-path="../IO/ADC.html">
+            
+                <a href="../IO/ADC.html">
+            
+                    
+                    ADC
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -252,6 +265,32 @@
             
         </li>
     
+        <li class="chapter " data-level="2.3.3" data-path="../General/RTC.html">
+            
+                <a href="../General/RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../General/Deep-sleep.html">
+            
+                <a href="../General/Deep-sleep.html">
+            
+                    
+                    Deep-sleep
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -277,6 +316,19 @@
             
                     
                     WIFI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="../Network/requests.html">
+            
+                <a href="../Network/requests.html">
+            
+                    
+                    requests
             
                 </a>
             
@@ -316,6 +368,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.5.2" data-path="DS18x20.html">
+            
+                <a href="DS18x20.html">
+            
+                    
+                    DS18x20
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -341,6 +406,32 @@
             
                     
                     SPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.2" data-path="../BUS/I2C.html">
+            
+                <a href="../BUS/I2C.html">
+            
+                    
+                    I2C
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.3" data-path="../BUS/OneWire.html">
+            
+                <a href="../BUS/OneWire.html">
+            
+                    
+                    OneWire
             
                 </a>
             
@@ -399,6 +490,20 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="dht">DHT</h1>
+<p>The DHT driver is implemented in software and works on all pins:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> dht
+<span class="hljs-keyword">import</span> machine
+
+d = dht.DHT11(machine.Pin(<span class="hljs-number">4</span>))
+d.measure()
+d.temperature() <span class="hljs-comment"># eg. 23 (&#xB0;C)</span>
+d.humidity()    <span class="hljs-comment"># eg. 41 (% RH)</span>
+
+d = dht.DHT22(machine.Pin(<span class="hljs-number">4</span>))
+d.measure()
+d.temperature() <span class="hljs-comment"># eg. 23.6 (&#xB0;C)</span>
+d.humidity()    <span class="hljs-comment"># eg. 41.3 (% RH)</span>
+</code></pre>
 
                                 
                                 </section>
@@ -431,7 +536,7 @@
                 </a>
                 
                 
-                <a href="../BUS/" class="navigation navigation-next " aria-label="Next page: BUS">
+                <a href="DS18x20.html" class="navigation navigation-next " aria-label="Next page: DS18x20">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -442,7 +547,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"DHT","level":"2.5.1","depth":2,"next":{"title":"BUS","level":"2.6","depth":1,"path":"BUS/README.md","ref":"BUS/README.md","articles":[{"title":"SPI","level":"2.6.1","depth":2,"path":"BUS/SPI.md","ref":"BUS/SPI.md","articles":[]}]},"previous":{"title":"Sensor","level":"2.5","depth":1,"path":"Sensor/README.md","ref":"Sensor/README.md","articles":[{"title":"DHT","level":"2.5.1","depth":2,"path":"Sensor/DHT.md","ref":"Sensor/DHT.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Sensor/DHT.md","mtime":"2017-12-02T10:44:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-02T11:33:44.054Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"DHT","level":"2.5.1","depth":2,"next":{"title":"DS18x20","level":"2.5.2","depth":2,"path":"Sensor/DS18x20.md","ref":"Sensor/DS18x20.md","articles":[]},"previous":{"title":"Sensor","level":"2.5","depth":1,"path":"Sensor/README.md","ref":"Sensor/README.md","articles":[{"title":"DHT","level":"2.5.1","depth":2,"path":"Sensor/DHT.md","ref":"Sensor/DHT.md","articles":[]},{"title":"DS18x20","level":"2.5.2","depth":2,"path":"Sensor/DS18x20.md","ref":"Sensor/DS18x20.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Sensor/DHT.md","mtime":"2017-12-03T13:27:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-03T13:33:03.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

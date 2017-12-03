@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="I2C.html" />
+    
     
     <link rel="prev" href="./" />
     
@@ -205,6 +207,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.2.3" data-path="../IO/ADC.html">
+            
+                <a href="../IO/ADC.html">
+            
+                    
+                    ADC
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -250,6 +265,32 @@
             
         </li>
     
+        <li class="chapter " data-level="2.3.3" data-path="../General/RTC.html">
+            
+                <a href="../General/RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../General/Deep-sleep.html">
+            
+                <a href="../General/Deep-sleep.html">
+            
+                    
+                    Deep-sleep
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -275,6 +316,19 @@
             
                     
                     WIFI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="../Network/requests.html">
+            
+                <a href="../Network/requests.html">
+            
+                    
+                    requests
             
                 </a>
             
@@ -314,6 +368,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.5.2" data-path="../Sensor/DS18x20.html">
+            
+                <a href="../Sensor/DS18x20.html">
+            
+                    
+                    DS18x20
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -339,6 +406,32 @@
             
                     
                     SPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.2" data-path="I2C.html">
+            
+                <a href="I2C.html">
+            
+                    
+                    I2C
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.3" data-path="OneWire.html">
+            
+                <a href="OneWire.html">
+            
+                    
+                    OneWire
             
                 </a>
             
@@ -397,6 +490,37 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="spi">SPI</h1>
+<h2 id="software-spi-bus">Software SPI bus</h2>
+<p>There are two SPI drivers. One is implemented in software (bit-banging) and works on all pins, and is accessed via the machine.SPI class:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, SPI
+
+<span class="hljs-comment"># construct an SPI bus on the given pins</span>
+<span class="hljs-comment"># polarity is the idle state of SCK</span>
+<span class="hljs-comment"># phase=0 means sample on the first edge of SCK, phase=1 means the second</span>
+spi = SPI(<span class="hljs-number">-1</span>, baudrate=<span class="hljs-number">100000</span>, polarity=<span class="hljs-number">1</span>, phase=<span class="hljs-number">0</span>, sck=Pin(<span class="hljs-number">0</span>), mosi=Pin(<span class="hljs-number">2</span>), miso=Pin(<span class="hljs-number">4</span>))
+
+spi.init(baudrate=<span class="hljs-number">200000</span>) <span class="hljs-comment"># set the baudrate</span>
+
+spi.read(<span class="hljs-number">10</span>)            <span class="hljs-comment"># read 10 bytes on MISO</span>
+spi.read(<span class="hljs-number">10</span>, <span class="hljs-number">0xff</span>)      <span class="hljs-comment"># read 10 bytes while outputing 0xff on MOSI</span>
+
+buf = bytearray(<span class="hljs-number">50</span>)     <span class="hljs-comment"># create a buffer</span>
+spi.readinto(buf)       <span class="hljs-comment"># read into the given buffer (reads 50 bytes in this case)</span>
+spi.readinto(buf, <span class="hljs-number">0xff</span>) <span class="hljs-comment"># read into the given buffer and output 0xff on MOSI</span>
+
+spi.write(<span class="hljs-string">b&apos;12345&apos;</span>)     <span class="hljs-comment"># write 5 bytes on MOSI</span>
+
+buf = bytearray(<span class="hljs-number">4</span>)      <span class="hljs-comment"># create a buffer</span>
+spi.write_readinto(<span class="hljs-string">b&apos;1234&apos;</span>, buf) <span class="hljs-comment"># write to MOSI and read from MISO into the buffer</span>
+spi.write_readinto(buf, buf) <span class="hljs-comment"># write buf to MOSI and read MISO back into buf</span>
+</code></pre>
+<h2 id="hardware-spi-bus">Hardware SPI bus</h2>
+<p>The hardware SPI is faster (up to 80Mhz), but only works on following pins: MISO is GPIO12, MOSI is GPIO13, and SCK is GPIO14. It has the same methods as the bitbanging SPI class above, except for the pin parameters for the constructor and init (as those are fixed):</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, SPI
+
+hspi = SPI(<span class="hljs-number">1</span>, baudrate=<span class="hljs-number">80000000</span>, polarity=<span class="hljs-number">0</span>, phase=<span class="hljs-number">0</span>)
+</code></pre>
+<p><code>SPI(0)</code> is used for FlashROM and not available to users.</p>
 
                                 
                                 </section>
@@ -424,10 +548,14 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: BUS">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: BUS">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="I2C.html" class="navigation navigation-next " aria-label="Next page: I2C">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -436,7 +564,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"SPI","level":"2.6.1","depth":2,"previous":{"title":"BUS","level":"2.6","depth":1,"path":"BUS/README.md","ref":"BUS/README.md","articles":[{"title":"SPI","level":"2.6.1","depth":2,"path":"BUS/SPI.md","ref":"BUS/SPI.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"BUS/SPI.md","mtime":"2017-12-02T10:44:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-02T11:33:44.054Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SPI","level":"2.6.1","depth":2,"next":{"title":"I2C","level":"2.6.2","depth":2,"path":"BUS/I2C.md","ref":"BUS/I2C.md","articles":[]},"previous":{"title":"BUS","level":"2.6","depth":1,"path":"BUS/README.md","ref":"BUS/README.md","articles":[{"title":"SPI","level":"2.6.1","depth":2,"path":"BUS/SPI.md","ref":"BUS/SPI.md","articles":[]},{"title":"I2C","level":"2.6.2","depth":2,"path":"BUS/I2C.md","ref":"BUS/I2C.md","articles":[]},{"title":"OneWire","level":"2.6.3","depth":2,"path":"BUS/OneWire.md","ref":"BUS/OneWire.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"BUS/SPI.md","mtime":"2017-12-03T13:29:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-03T13:33:03.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
