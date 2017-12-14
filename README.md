@@ -7,5 +7,5 @@ You can also read [the official document](http://docs.micropython.org/en/latest/
 
 ## ESP32
 
-![ESP32](/static/ESP32-bare.JPG)
+![ESP32](/static/ESP32-bare.jpg)
 

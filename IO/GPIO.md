@@ -6,7 +6,7 @@ In this example, we use several LEDs to show how to use GPIO with MicroPython.
 
 ### Wiring
 
-![GPIO-OUTPUT](./GPIO-OUTPUT.JPG)
+![GPIO-OUTPUT](/static/GPIO/GPIO-OUTPUT.jpg)
 
 - Connect pin 4 to a LED + pin.  
 - Connect GND to the LED - pin.
@@ -31,7 +31,7 @@ By setting high or low levels, the LED will be on or off.
 
 ### Wiring
 
-![GPIO-INPUT](./GPIO-INPUT.JPG)
+![GPIO-INPUT](/static/GPIO/GPIO-INPUT.jpg)
 
 - Connect a button to pin 2.
 - Connect GND to button.
